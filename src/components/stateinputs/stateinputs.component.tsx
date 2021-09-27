@@ -5,8 +5,56 @@ import { clone, capitalize } from 'lodash';
 declare type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
 
 export interface StateInputGrids {
-  left: number;
-  right: number;
+  xs?: {
+    left?: {
+      span: number;
+      offset: number;
+    }
+    right?: {
+      span: number;
+      offset: number;
+    }
+  }
+  sm?: {
+    left?: {
+      span: number;
+      offset: number;
+    }
+    right?: {
+      span: number;
+      offset: number;
+    }
+  }
+  md: {
+    left:  {
+      span: number;
+      offset?: number;
+    }
+    right:  {
+      span: number;
+      offset?: number;
+    }
+  }
+  lg?: {
+    left:  {
+      span: number;
+      offset: number;
+    }
+    right:  {
+      span: number;
+      offset: number;
+    }
+  }
+  xl?: {
+    left:  {
+      span: number;
+      offset: number;
+    }
+    right:  {
+      span: number;
+      offset: number;
+    }
+  }
 }
 
 export interface StateInputStyles {
@@ -102,9 +150,13 @@ export default class StateInputs extends Component<StateInputsProps, StateInputS
       return (
         <Row key={key}>
           <Col key={'l' + index}
-            xs={{ span: 12, offset: 0 }}
-            sm={{ span: 12, offset: 0 }}
-            md={{ span: this.props.grid.left, offset: 0 }}
+            xs={{ span: this.props.grid.xs?.left?.span ?? 12, offset: this.props.grid.xs?.left?.offset ?? 0 }}
+            sm={{ span: (this.props.grid.sm?.left?.span ?? 12), offset: this.props.grid.sm?.left?.offset ?? 0 }}
+            md={{ span: this.props.grid.md.left?.span ?? 6, offset: this.props.grid.md?.left?.offset ?? 0 }}
+            lg={{ span: this.props.grid.lg?.left?.span ?? this.props.grid.md.left?.span,
+                  offset: this.props.grid.lg?.left?.offset ?? this.props.grid.md.left?.offset ?? 0 }}
+            xl={{ span: this.props.grid.xl?.left?.span ?? this.props.grid.lg?.left?.span ?? this.props.grid.md.left?.span,
+                  offset: this.props.grid.xl?.left?.offset ?? this.props.grid.lg?.left?.offset ?? this.props.grid.md.left?.offset ?? 0 }}
           >
             <Form.Label key={index} htmlFor={key}>
               { !Array.isArray(state) && state.asterisk && <Form.Label key={index} htmlFor={key} style={{ color: 'red' }}>*</Form.Label> }
@@ -112,9 +164,13 @@ export default class StateInputs extends Component<StateInputsProps, StateInputS
             </Form.Label>
           </Col>
           <Col key={'r' + index}
-            xs={{ span: 12, offset: 0 }}
-            sm={{ span: 12, offset: 0 }}
-            md={{ span: this.props.grid.right, offset: 0 }}
+            xs={{ span: this.props.grid.xs?.right?.span ?? 12, offset: this.props.grid.xs?.right?.offset ?? 0 }}
+            sm={{ span: this.props.grid.sm?.right?.span ?? 12, offset: this.props.grid.sm?.right?.offset ?? 0 }}
+            md={{ span: this.props.grid.md.right?.span ?? 6, offset: this.props.grid.md?.right?.offset ?? 0 }}
+            lg={{ span: this.props.grid.lg?.right?.span ?? this.props.grid.md.right?.span ?? 6,
+                  offset: this.props.grid.lg?.right?.offset ?? this.props.grid.md?.right?.offset ?? 0 }}
+            xl={{ span: this.props.grid.xl?.right?.span ?? this.props.grid.lg?.right?.span ?? this.props.grid.md.right?.span ?? 6,
+                  offset: this.props.grid.xl?.right?.offset ?? this.props.grid.lg?.right?.offset ?? this.props.grid.md?.right?.offset ?? 0 }}
           >
             {inputElement}
           </Col>

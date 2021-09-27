@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <StateInputs grid={{left: 3, right: 9}} initState={{ need: { asterisk: true, value: 'need ar'}, text: { value: 'a' }, selects: [{ value: 'first' }, { value: 'second'}] }} />
+        <StateInputs grid={{md: {left: { span: 3 } , right: { span: 9 } }}} initState={{ need: { asterisk: true, value: 'need ar'}, text: { value: 'a' }, selects: [{ value: 'first' }, { value: 'second'}] }} />
       </header>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
